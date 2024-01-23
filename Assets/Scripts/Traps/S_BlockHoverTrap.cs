@@ -2,37 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class S_BlockHoverTrap : MonoBehaviour
+public class S_BlockHoverTrap : Trap_General
 {
-   
-    private bool isPlayerInside = false;
-    private float blockDuration;
-    private Player characterMovement; // Assuming you have a PlayerMovement script
 
-    private void Start()
-    {
-        // Assuming the player has a PlayerMovement script attached to the same GameObject
-        characterMovement = GetComponent<Player>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if the entering collider is the player
-        if (other.CompareTag("Player"))
-        {
-            // Block the player and start the timer
-            BlockPlayer();
-        }
-    }
-
-    private void BlockPlayer()
+    protected override void ActivateTrap()
     {
         // Implement the logic to freeze player movement
         Debug.Log("Player movement frozen!");
 
-        characterMovement.speed = 0;
-        characterMovement.turning_speed = 0;
-        Invoke("UnblockPlayer", blockDuration);
+        Player_scr.speed = 0;
+        Invoke("UnblockPlayer", 6);
     }
 
     private void UnblockPlayer()
@@ -40,7 +19,6 @@ public class S_BlockHoverTrap : MonoBehaviour
         // Implement the logic to unfreeze player movement
         Debug.Log("Player movement unfrozen!");
 
-        characterMovement.speed = characterMovement.speed_normal;
-        characterMovement.turning_speed = characterMovement.turning_speed_normal;
+        Player_scr.speed = Player_scr.speed_normal;
     }
 }

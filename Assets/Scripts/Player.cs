@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public float speed_max;
     public float speed_normal;
     public float turning_speed;
     public float turning_speed_normal;
@@ -34,6 +35,11 @@ public class Player : MonoBehaviour
         transform.Rotate(0, Input.GetAxis("Horizontal") * turning_speed * Time.fixedDeltaTime, 0);
     }
 
+    public void SpeedManager(float speed_mod)
+    {
+        speed = Mathf.Clamp(speed + speed_mod, 0, speed_max);
+    }
+
     public void GroundCheck()
     {
         RaycastHit hit;
@@ -44,6 +50,8 @@ public class Player : MonoBehaviour
             {
                 transform.Translate(Vector3.up * (distance_from_ground - hit.distance));
                 rb2d.velocity = new Vector3(rb2d.velocity.x, 0, rb2d.velocity.z);
+
+                Debug.Log("Player not far enought from ground");
             }
         }
     }
