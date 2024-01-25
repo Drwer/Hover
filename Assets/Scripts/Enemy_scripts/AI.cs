@@ -49,18 +49,10 @@ public class AI : MonoBehaviour
 
         // Se l'oggetto è raggiunto, raccoglilo e resetta il target
         float distanceToTarget = Vector3.Distance(transform.position, targetObject.transform.position);
-        if (distanceToTarget < 1f)
+        if (distanceToTarget == 0f)
         {
-            CollectObject();
             targetObject = null;
         }
-    }
-
-    void CollectObject()
-    {
-        // Esegui l'azione di raccolta (rimuovi l'oggetto, incrementa il punteggio, ecc.)
-        Destroy(targetObject);
-        // Aggiungi qui il codice per gestire la raccolta dell'oggetto
     }
 }
 
