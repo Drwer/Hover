@@ -68,32 +68,5 @@ namespace EHLib.Utils
             // computes the new position
             transform.position = transform.position + direction.normalized * movingSpeed * Time.deltaTime;
         }
-
-        #region gizmos
-
-        // helper functions to visualize the path
-        private void OnDrawGizmos()
-        {
-            for (int i = 0; i < pathPoints.Length - 1; i++)
-            {
-                if (pathPoints[i] == null || pathPoints[i + 1] == null)
-                    continue;
-                DrawPathPointGizmo(i);
-                Gizmos.color = Color.magenta;
-                Gizmos.DrawLine(pathPoints[i].position, pathPoints[i + 1].position);
-            }
-
-            DrawPathPointGizmo(pathPoints.Length - 1);
-        }
-
-        private void DrawPathPointGizmo(int i)
-        {
-            if (pathPoints[i] == null)
-                return;
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(pathPoints[i].position, 0.2f);
-        }
-
-        #endregion
     }
 }
